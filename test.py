@@ -38,12 +38,14 @@ def send_welcome(message):
 
 	answer = message.text + " Գոռըդում " + "հմի " + w.get_detailed_status() + "\n"
 	lome = "ջերմաստիճանը մոտ " + str(round(temp)) + " աստիճան է" + "\n\n"
-	if temp < 20:
+	if temp < 15:
 		lome += "շատ ա ցուրտ տաք կ հագնվես"
-	elif temp < 15:
+	elif temp > 15 and temp < 18:
 		lome += "ըտենց շատ չի ցուրտ բայց տաք կ հագնվես"
-	
-		
+	elif temp > 20:
+	    lome += "կարաս շորտիկներով դուրս գաս"
+
 	bot.send_message(message.chat.id, answer + str(lome))
 
+    	
 bot.polling( none_stop = True)	
