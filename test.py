@@ -1,4 +1,25 @@
+# num1 = input("type first number ")
+# num2 = input("type second number ")
+# sim = input("type operator ")
+# if sim == "pluss": print(int(num1) + int(num2))
+# if sim == "minus": print(int(num1) - int(num2))
+# if sim == "divide": print(int(num1) / int(num2))
+# if sim == "multiply": print(int(num1) * int(num2))	
+# if sim == "+": print(int(num1) + int(num2))
+# if sim == "-": print(int(num1) - int(num2))
+# if sim == "/": print(int(num1) / int(num2))
+# if sim == "*": print(int(num1) * int(num2))	
+# import pyowm
 
+# owm = pyowm.OWM('ef16c91feb6e48f02903e6769e2a1ebc', language = "ru")
+ 
+# plase = input("vor qaxaqum/erkrum es mnum ? ")
+
+# observation = owm.weather_at_place(plase)
+# w = observation.get_weather()
+# temp = w.get_temperature('celsius') 
+# print(plase + " goradum " + "hmi " + w.get_detailed_status())  
+# print("jermastichan@ motavorapes" + str(temp))
 import pyowm
 import telebot
 import math
@@ -9,7 +30,6 @@ server = Flask(__name__)
 owm = pyowm.OWM('ef16c91feb6e48f02903e6769e2a1ebc', language = "ru")
 bot = telebot.TeleBot("845338292:AAHk3_Fkyqpn4v-g28zoINnYmaSrX_WOblw")
 
-TOKEN = "845338292:AAHk3_Fkyqpn4v-g28zoINnYmaSrX_WOblw"
 @bot.message_handler(content_types=['text'])
 def send_welcome(message):
 	observation = owm.weather_at_place( message.text )
@@ -27,15 +47,3 @@ def send_welcome(message):
 	bot.send_message(message.chat.id, answer + str(lome))
 
 bot.polling( none_stop = True)	
-@server.route('/' + TOKEN, methods=['POST'])
-def getMessage():
-	bot.process_new_updates([telebot.types.Updates.de_json(request.stream.read().decode("utf-8"))])
-	return "!", 200
-
-@server.route("/")
-def webhook():
-	bot.remove_webhook()
-	bot.set_webhook(url='https://agile-scrubland-73104.herokuapp.com/' + TOKEN)	
-	return "!", 200
-if __name__ == "__main__":
-server.run(host="0.0.0.0", port=int(os.environ.get('PORT', 5000)))	
